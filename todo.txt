@@ -1,0 +1,7 @@
+Logged in user display name
+home page for loggedIn user - restrict access to page
+bitcoin price on navbar
+add, update, remove transaction
+Charts
+Mongodb
+gulp stuff
