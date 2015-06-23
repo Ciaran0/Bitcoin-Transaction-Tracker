@@ -12,10 +12,8 @@ router.post('/api/login', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
-  console.log(req.payload);
 
   passport.authenticate('local', function(err, user, info){
-    console.log(user);
     if(err){ return next(err); }
 
     if(user){
