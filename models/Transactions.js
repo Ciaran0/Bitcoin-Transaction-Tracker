@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var User = mongoose.model('User');
+
 var TransactionSchema = new mongoose.Schema({
   buyAmount: Number,
   alertHigh: Number,
