@@ -1,5 +1,4 @@
 angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', 'bitcoinPrice', function($scope, bitcoinPrice) {
+  .controller('MainCtrl', ['$scope', function($scope) {
     $scope.headingTitle = 'Bitcoin Tracker';
-    $scope.price = bitcoinPrice.getPrice();
   }]);

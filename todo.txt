@@ -1,4 +1,5 @@
-Logged in user display name
+Logged in user display name == (DONE)
+refactor routes
 home page for loggedIn user - restrict access to page
 bitcoin price on navbar
 add, update, remove transaction

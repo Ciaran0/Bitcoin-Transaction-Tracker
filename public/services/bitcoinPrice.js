@@ -5,12 +5,10 @@ angular.module('MyApp')
 
       price.getPrice = function() {
         $http.get('https://api.bitcoinaverage.com/all').success(function(data){
-          console.log(data.EUR.averages.last);
           price.data = data.EUR.averages.last;
         });
         return price.data;
       };
-      console.log(price)
   return price;
 
 }]);

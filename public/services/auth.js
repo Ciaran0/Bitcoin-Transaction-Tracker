@@ -1,38 +1,11 @@
 angular.module('MyApp')
-  .factory('Auth', ['$http', '$location', '$alert','$window',
-    function($http, $location, $alert, $window) {
-      var auth = {};
-      auth.saveToken = function (token){
-        console.log("saving token!!");
-        $window.localStorage['bitTracker-token'] = token;
-      };
-      auth.getToken = function (){
-        return $window.localStorage['bitTracker-token'];
-      }
-      auth.isLoggedIn = function(){
-       var token = auth.getToken();
-
-         if(token){
-           var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-           return payload.exp > Date.now() / 1000;
-         } else {
-           return false;
-         }
-       };
-       auth.currentUser = function(){
-       if(auth.isLoggedIn()){
-         var token = auth.getToken();
-         var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-         return payload.username;
-       }
-     }
+  .factory('auth', ['$http', '$location', '$alert','$window', 'token',
+    function($http, $location, $alert, $window, token) {
         return {
         login: function(user) {
           return $http.post('/api/login', user)
             .success(function(data) {
-              auth.saveToken(data.token);
+              token.saveToken(data.token);
               $location.path('/');
               $alert({
                 title: 'Cheers!',
@@ -57,7 +30,7 @@ angular.module('MyApp')
             .success(function(data, status, headers, config) {
               $location.path('/login');
               console.log(data.token);
-              auth.saveToken(data.token);
+              token.saveToken(data.token);
               $alert({
                 title: 'Congratulations!',
                 content: 'Your account has been created.',
