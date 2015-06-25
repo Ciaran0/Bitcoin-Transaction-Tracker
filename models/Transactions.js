@@ -7,7 +7,7 @@ var TransactionSchema = new mongoose.Schema({
   alertLow: Number,
   alert: Boolean,
   date: Date,
-  weekValue, [Number],
+  weekValue: [Number],
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

@@ -14,10 +14,13 @@ var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 require('./models/Users');
+require('./models/Transactions');
 require('./config/passport');
-var userRoutes = require('./routes/users');
-var transactionRoutes = ('.require/transactionRoutes')
 var User = mongoose.model('User');
+var Transaction = mongoose.model('Transaction');
+var userRoutes = require('./routes/users');
+var transactionRoutes = require('./routes/transactionRoutes');
+
 
 
 mongoose.connect('mongodb://localhost/bi')
@@ -33,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
 app.use('/', userRoutes);
-app.use('/transactions. transactionRoutes');
+app.use('/transactions', transactionRoutes);
 
 //redirect url. Should be last route
 app.get('*', function(req, res) {

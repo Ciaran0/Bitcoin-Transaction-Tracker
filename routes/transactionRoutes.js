@@ -13,7 +13,7 @@ router.param('transaction', function(req, res, next, id){
       return next(err);
     }
     if(!transaction){
-      return next(new Error('Couldnt find transaction');)
+      return next(new Error('Couldnt find transaction'));
     }
 
     req.transaction = transaction;
@@ -29,7 +29,7 @@ router.param('user', function(req,res,next,id){
       return next(err);
     }
     if(!transaction){
-      return next(new Error('Couldnt find user');)
+      return next(new Error('Couldnt find user'));
     }
 
     req.user = user;
