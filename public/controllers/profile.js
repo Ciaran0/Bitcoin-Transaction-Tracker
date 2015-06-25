@@ -1,13 +1,14 @@
-angular.module('MyApp').controller('ProfileCtrl', [
-'$scope', 'transactions',
-function($scope, transactions) {
+angular.module('MyApp')
+.controller('ProfileCtrl', [
+        '$scope','transactions','token',
+        function($scope,transactions,token) {
   $scope.transactions = transactions.transactions;
+  $scope.amount =0;
   $scope.addTransaction = function(){
-    transaction.create({
-      amount: $scope.amount,
-      date: $scope.date
+    transactions.create(token.currentUserId(),{
+      amount: $scope.amount
     });
-  }
+  };
   $scope.selectedDate = new Date();
   $scope.getType = function(key) {
      return Object.prototype.toString.call($scope[key]);

@@ -21,9 +21,15 @@ angular.module('MyApp')
     if(token.isLoggedIn()){
       var userToken = token.getToken();
       var payload = JSON.parse($window.atob(userToken.split('.')[1]));
-
       return payload.username;
     }
+  };
+  token.currentUserId = function(){
+      if(token.isLoggedIn()){
+          var userToken = token.getToken();
+          var payload = JSON.parse($window.atob(userToken.split('.')[1]));
+          return payload._id;
+      }
   };
   return token;
 }]);

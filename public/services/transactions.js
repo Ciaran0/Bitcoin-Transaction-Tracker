@@ -1,25 +1,22 @@
 angular.module('MyApp')
-  .factory('transactions' ['$http', 'auth', function($http, auth) {
+  .factory('transactions', ['$http', 'token', function($http, token) {
     var o = {
       transactions: []
     };
     o.getAllForUser = function(user) {
       return $http.get('transactions/users/'+user._id, {
-        headers: {Authorization: 'Bearer '+auth.getToken()}
+        headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
         angular.copy(data, o.transactions);
         //And alert - possibly in controller
       });
     };
-    o.create = function(user){
-      return $http.post('/transactions/users/'+user._id, {
-        headers: {Authorization: 'Bearer '+auth.getToken()}
+    o.create = function(id,transaction){
+      return $http.post('/transactions/users/'+id, transaction, {
+        headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
         o.transactions.push(data);
       })
-    }
-
-
+    };
     return o;
-
-  }])
+  }]);
