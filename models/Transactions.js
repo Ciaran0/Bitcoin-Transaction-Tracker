@@ -5,10 +5,10 @@ var TransactionSchema = new mongoose.Schema({
   amount: Number,
   //alertHigh: Number,
   //alertLow: Number,
-  //alert: Boolean,
+  alert: { type: Boolean , default: false },
   date: Date,
   //weekValue: [Number],
-  //owner: { type: Number, ref: 'User' }
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 mongoose.model('Transaction', TransactionSchema);

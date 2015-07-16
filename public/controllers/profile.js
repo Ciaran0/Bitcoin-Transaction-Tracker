@@ -3,13 +3,14 @@ angular.module('MyApp')
         '$scope','transactions','token',
         function($scope,transactions,token) {
   $scope.transactions = transactions.transactions;
-  $scope.amount =0;
+  $scope.selectedDate = new Date();
   $scope.addTransaction = function(){
     transactions.create(token.currentUserId(),{
-      amount: $scope.amount
+      amount: $scope.amount,
+      date: $scope.selectedDate
     });
   };
-  $scope.selectedDate = new Date();
+
   $scope.getType = function(key) {
      return Object.prototype.toString.call($scope[key]);
    };

@@ -83,23 +83,25 @@ router.get('/transactions/:transaction', function(req, res){
 
 //add a new transaction for a user
 router.post('/transactions/users/:user', function(req, res){
-  console.log("New transaction handler");
   var transaction = new Transaction(req.body);
-  console.log(req.body);
-  //req.user.
-
+  transaction.owner = req.user._id;
   transaction.save(function(err, transaction){
     if(err){
       return next(err);
     }
-
-    res.json(transaction)
+    req.user.transactions.push(transaction);
+    req.user.save(function(err, post) {
+    if(err){ return next(err); }
+      res.json(transaction);
+    });
   })
 });
 
 //Get all transactions for a user
 router.get('/transactions/users/:user', function(req, res){
-  console.log("Get transactions for a user");
-  //TODO
+  req.user.populate('transactions', function(err, user) {
+    if (err) { return next(err); }
+    res.json(user);
+  });
 });
 module.exports = router;
