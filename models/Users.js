@@ -3,11 +3,10 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-var Transaction = mongoose.model('Transaction');
+//var Transaction = mongoose.model('Transaction');
 
 
 var UserSchema = new mongoose.Schema({
-  _id: Number
   username: {type: String, lowercase: true, unique: true},
   hash: String,
   salt: String,

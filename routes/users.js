@@ -85,8 +85,8 @@ router.get('/transactions/:transaction', function(req, res){
 router.post('/transactions/users/:user', function(req, res){
   console.log("New transaction handler");
   var transaction = new Transaction(req.body);
-  transaction.user = req.user;
-  req.user.
+  console.log(req.body);
+  //req.user.
 
   transaction.save(function(err, transaction){
     if(err){

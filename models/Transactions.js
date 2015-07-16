@@ -6,9 +6,9 @@ var TransactionSchema = new mongoose.Schema({
   //alertHigh: Number,
   //alertLow: Number,
   //alert: Boolean,
-  //date: Date,
+  date: Date,
   //weekValue: [Number],
-  _owner: { type: Number, ref: 'User' }
+  //owner: { type: Number, ref: 'User' }
 });
 
 mongoose.model('Transaction', TransactionSchema);
