@@ -103,7 +103,7 @@ router.post('/transactions/users/:user', function(req, res){
 router.get('/transactions/users/:user', function(req, res){
   req.user.populate('transactions', function(err, user) {
     if (err) { return next(err); }
-    res.json(user);
+    res.json(user.transactions);
   });
 });
 module.exports = router;

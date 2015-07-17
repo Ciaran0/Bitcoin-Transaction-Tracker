@@ -7,8 +7,7 @@ angular.module('MyApp')
       return $http.get('transactions/users/'+token.currentUserId(), {
         headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
-        angular.copy(data.transactions, o.transactions);
-        console.log(o.transactions);
+        angular.copy(data, o.transactions);
         //And alert - possibly in controller
       });
     };
