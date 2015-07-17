@@ -19,6 +19,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li data-match-route="/$"><a href="/">Home</a></li>
+      <li ng-if="isLoggedIn()" data-match-route="/profile"><a href="/profile">Your Transactions</a></li>
     </ul>
     <ul class="nav navbar-nav pull-right" ng-if="!isLoggedIn()">
       <li data-match-route="/login"><a href="/login">Login</a></li>

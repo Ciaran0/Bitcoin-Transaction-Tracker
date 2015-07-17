@@ -4,10 +4,11 @@ angular.module('MyApp')
       transactions: []
     };
     o.getAllForUser = function(user) {
-      return $http.get('transactions/users/'+user._id, {
+      return $http.get('transactions/users/'+token.currentUserId(), {
         headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
-        angular.copy(data, o.transactions);
+        angular.copy(data.transactions, o.transactions);
+        console.log(o.transactions);
         //And alert - possibly in controller
       });
     };

@@ -26,7 +26,10 @@ angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mg
              $location.path('/login');
           }
           return deferred.promise;
-        }
+        },
+        postPromise: ['transactions', function(transactions){
+          return transactions.getAllForUser();
+        }]
       }
     })
     .otherwise({

@@ -6,7 +6,7 @@ angular.module('MyApp')
           return $http.post('/api/login', user)
             .success(function(data) {
               token.saveToken(data.token);
-              $location.path('/');
+              $location.path('/profile');
               $alert({
                 title: 'Cheers!',
                 content: 'You have successfully logged in.',
@@ -28,7 +28,7 @@ angular.module('MyApp')
         signup: function(user) {
           return $http.post('/api/signup', user)
             .success(function(data, status, headers, config) {
-              $location.path('/login');
+              $location.path('/profile');
               console.log(data.token);
               token.saveToken(data.token);
               $alert({

@@ -83,6 +83,7 @@ router.get('/transactions/:transaction', function(req, res){
 
 //add a new transaction for a user
 router.post('/transactions/users/:user', function(req, res){
+  console.log(req.body);
   var transaction = new Transaction(req.body);
   transaction.owner = req.user._id;
   transaction.save(function(err, transaction){
@@ -93,6 +94,7 @@ router.post('/transactions/users/:user', function(req, res){
     req.user.save(function(err, post) {
     if(err){ return next(err); }
       res.json(transaction);
+      console.log(transaction);
     });
   })
 });
