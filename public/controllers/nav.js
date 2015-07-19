@@ -3,5 +3,6 @@ angular.module('MyApp')
     $scope.isLoggedIn = token.isLoggedIn;
     $scope.currentUser = token.currentUser;
     $scope.logout = auth.logout;
-    $scope.price = bitcoinPrice.getPrice;
+    $scope.price = bitcoinPrice.getPrice();
+    console.log(bitcoinPrice.usd);
   }]);

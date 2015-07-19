@@ -6,7 +6,7 @@ angular.module('MyApp')
   $scope.addTransaction = function(){
     transactions.create(token.currentUserId(),{
       amount: $scope.amount,
-      date: $scope.date
+      date: $scope.selectedDate
     });
   };
   $scope.selectedDate = new Date();

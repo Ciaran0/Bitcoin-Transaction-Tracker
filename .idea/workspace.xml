@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f704d54-4418-4a37-b6a6-245ab39969a8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/profile.html" afterPath="$PROJECT_DIR$/public/views/profile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/controllers/profile.js" afterPath="$PROJECT_DIR$/public/controllers/profile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/services/token.js" afterPath="$PROJECT_DIR$/public/services/token.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/services/transactions.js" afterPath="$PROJECT_DIR$/public/services/transactions.js" />
-    </list>
+    <list default="true" id="5f704d54-4418-4a37-b6a6-245ab39969a8" name="Default" comment="" />
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

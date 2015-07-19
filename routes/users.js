@@ -70,7 +70,6 @@ router.param('user', function(req,res,next,id){
     if(!user){
       return next(new Error('Couldnt find user'));
     }
-
     req.user = user;
     return next();
   });
@@ -104,6 +103,13 @@ router.get('/transactions/users/:user', function(req, res){
   req.user.populate('transactions', function(err, user) {
     if (err) { return next(err); }
     res.json(user.transactions);
+  });
+});
+//
+router.delete('/transactions/:transaction/users/:user', function(req, res){
+  Transaction.findOneAndRemove({id: 'req.transaction._id'}, function(err){
+    //update user array?
+    //return
   });
 });
 module.exports = router;

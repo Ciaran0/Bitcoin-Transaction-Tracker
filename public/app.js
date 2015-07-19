@@ -27,8 +27,11 @@ angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mg
           }
           return deferred.promise;
         },
-        postPromise: ['transactions', function(transactions){
+        transactionPromise: ['transactions', function(transactions){
           return transactions.getAllForUser();
+        }],
+        pricePromise: ['bitcoinPrice', function(price){
+          return price.getPrice();
         }]
       }
     })
