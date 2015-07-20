@@ -36,11 +36,11 @@
           <!--<th>Value now/ Sell value</th>-->
           <tr ng-repeat-start="transaction in transactions | orderBy:sortType:sortReverse" data-allow-multiple="true" aria-multiselectable="true" class="clickable" bs-collapse-toggle >
             <td><a href="#" >{{transaction.date | date:'dd/MM/yyyy'}}</a></td>
-            <td>{{transaction.amount}}</td>
-            <td></td>
-            <td></td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.buyValue }}</td>
+            <td>{{ transaction.amount * price.usd | currency }}</td>
             <td><span class="glyphicon glyphicon-edit"></span></td>
-            <td><span class="glyphicon glyphicon-trash" ng-click="areYouSure(transaction._id)"></span></td>
+            <td><span class="glyphicon glyphicon-trash" ng-click="areYouSure(transaction)"></span></td>
             <tr ng-repeat-end  bs-collapse-target>
                 <td colspan=6>htrg</td>
             </tr>
@@ -62,13 +62,26 @@
                 <div class="form-group"
                      ng-class="{ 'has-success' : addTransactionForm.amount.$valid && addTransactionForm.amount.$dirty, 'has-error' : addTransactionForm.amount.$invalid && addTransactionForm.amount.$dirty }">
                   <input class="form-control input-lg" type="number" id="amount"
-                         name="amount" ng-model="amount" min="0" placeholder="Buy Amount" required
+                         name="amount" ng-model="amount" step="any" min="0" placeholder="Buy Amount" required
                          autofocus>
 
                   <div class="help-block text-danger" ng-if="addTransactionForm.amount.$dirty"
                        ng-messages="addTransactionForm.amount.$error">
                     <div ng-message="required">You must enter an amount</div>
                     <div ng-message="number">Amount is invalid. Must be greater than 0</div>
+                  </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{ 'has-success' : addTransactionForm.buyValue.$valid && addTransactionForm.buyValue.$dirty, 'has-error' : addTransactionForm.buyValue.$invalid && addTransactionForm.buyValue.$dirty }">
+                  <input class="form-control input-lg" type="number" id="buyValue"
+                         name="buyValue" ng-model="buyValue" step="any" min="0" placeholder="Buy Value ($)" required
+                         autofocus>
+
+                  <div class="help-block text-danger" ng-if="addTransactionForm.buyValue.$dirty"
+                       ng-messages="addTransactionForm.buyValue.$error">
+                    <div ng-message="required">You must enter a buy value</div>
+                    <div ng-message="number">Buy value is invalid. Must be greater than $0</div>
                   </div>
                 </div>
 

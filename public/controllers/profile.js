@@ -1,7 +1,7 @@
 angular.module('MyApp')
 .controller('ProfileCtrl', [
-        '$scope','transactions','token','SweetAlert',
-        function($scope,transactions,token,SweetAlert) {
+        '$scope','transactions','token','SweetAlert','bitcoinPrice',
+        function($scope,transactions,token,SweetAlert,bitcoinPrice) {
 
     $scope.transactions = transactions.transactions;
 
@@ -9,9 +9,12 @@ angular.module('MyApp')
     $scope.sortReverse = false;
     $scope.searchTransactions = '';
 
+    $scope.price = bitcoinPrice.getPrice();
+
     $scope.addTransaction = function(){
       transactions.create(token.currentUserId(),{
         amount: $scope.amount,
+        buyValue: $scope.buyValue,
         date: $scope.selectedDate
       });
     };
@@ -26,7 +29,7 @@ angular.module('MyApp')
      $scope.selectedDate = null;
    };
 
-   $scope.areYouSure = function(id) {
+   $scope.areYouSure = function(transaction) {
      SweetAlert.swal({
       title: "Are you sure?",
       text: "Your transaction will be romved permanently",
@@ -39,8 +42,8 @@ angular.module('MyApp')
       closeOnCancel: true
     }, function(isConfirm){
         if (isConfirm) {
-          console.log(id);
-          transactions.delete(id);
+          console.log("klkksd"+transaction);
+          transactions.remove(transaction);
           SweetAlert.swal("Deleted!", "Your transaction has been deleted.", "success");
         }
     });

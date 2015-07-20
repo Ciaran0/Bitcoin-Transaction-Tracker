@@ -80,6 +80,19 @@ router.get('/transactions/:transaction', function(req, res){
   res.json(req.transaction);
 });
 
+//delete a transaction
+router.delete('/transactions/:transaction/users/:user', function(req, res){
+  console.log("delete");
+  console.log(req.user);
+  console.log(req.transaction._id);
+  Transaction.findOneAndRemove({id: 'req.transaction._id'}, function(err){
+
+  });
+  req.user.transactions.pull(req.transaction);
+  req.user.save();
+  res.json({message: 'Transaction Deleted'});
+});
+
 //add a new transaction for a user
 router.post('/transactions/users/:user', function(req, res){
   console.log(req.body);
@@ -106,10 +119,5 @@ router.get('/transactions/users/:user', function(req, res){
   });
 });
 //
-router.delete('/transactions/:transaction/users/:user', function(req, res){
-  Transaction.findOneAndRemove({id: 'req.transaction._id'}, function(err){
-    //update user array?
-    //return
-  });
-});
+
 module.exports = router;

@@ -8,7 +8,6 @@ angular.module('MyApp')
         headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
         angular.copy(data, o.transactions);
-        //And alert - possibly in controller
       });
     };
     o.create = function(id,transaction){
@@ -16,7 +15,16 @@ angular.module('MyApp')
         headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
         o.transactions.push(data);
+        //And alert - possibly in controller
       })
     };
+    o.remove = function(transaction){
+      return $http.delete('/transactions/'+transaction._id+"/users/"+token.currentUserId(), {
+        headers: {Authorization: 'Bearer '+token.getToken()}
+      }).success(function(data){
+        var index = o.transactions.indexOf(transaction);
+        o.transactions.splice(index,1);
+      })
+    }
     return o;
   }]);
