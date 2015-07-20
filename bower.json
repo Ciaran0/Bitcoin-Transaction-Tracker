@@ -1,0 +1,28 @@
+{
+  "name": "bitcoinTransactionTracker",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Ciaran0/bitcoinTransactionTracker",
+  "authors": [
+    "ciaranoconnor23@gmail.com"
+  ],
+  "description": "Helps track your bitcoin transactions",
+  "main": "public/app.js",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "bitcoin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sweetalert": "~0.4.5",
+    "angular-sweetalert": "~1.1.0"
+  }
+}

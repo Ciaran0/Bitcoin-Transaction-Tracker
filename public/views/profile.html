@@ -17,20 +17,30 @@
       -->
       <p>You have {{transactions.length}} transactions</p>
       <table class="table table-striped" data-allow-multiple="true" bs-collapse>
-          <th>Date</th>
+        <thead>
+          <th><a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+            <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+            Date
+          </th>
+          <th>
+            <a href="#" ng-click="sortType = 'amount'; sortReverse = !sortReverse">
+            <span ng-show="sortType == 'amount' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'amount' && sortReverse" class="fa fa-caret-up"></span>
+            Amount (<i class="fa fa-btc"></i>)</th>
           <th>Buy value ($)</th>
-          <th>Amount</th>
-          <th>Value</th>
+          <th>Value now ($)</th>
           <th>Edit</th>
           <th>Delete</th>
+        </thead>
           <!--<th>Value now/ Sell value</th>-->
-          <tr ng-repeat-start="transaction in transactions | orderBy:'date'" data-allow-multiple="true" aria-multiselectable="true" class="clickable" bs-collapse-toggle>
-            <td>{{transaction.date | date:'dd/MM/yyyy'}}</td>
+          <tr ng-repeat-start="transaction in transactions | orderBy:sortType:sortReverse" data-allow-multiple="true" aria-multiselectable="true" class="clickable" bs-collapse-toggle >
+            <td><a href="#" >{{transaction.date | date:'dd/MM/yyyy'}}</a></td>
             <td>{{transaction.amount}}</td>
             <td></td>
             <td></td>
             <td><span class="glyphicon glyphicon-edit"></span></td>
-            <td><span class="glyphicon glyphicon-trash"></span></td>
+            <td><span class="glyphicon glyphicon-trash" ng-click="areYouSure(transaction._id)"></span></td>
             <tr ng-repeat-end  bs-collapse-target>
                 <td colspan=6>htrg</td>
             </tr>

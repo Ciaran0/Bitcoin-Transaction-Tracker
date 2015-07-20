@@ -8,6 +8,8 @@
   <title>Bitcoin Tacker</title>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
+
 </head>
 <body>
   <div class="navbar navbar-default navbar-static-top"
@@ -29,7 +31,7 @@
       <li data-match-route="/signup"><a href="/signup">Sign up</a></li>
     </ul>
     <ul class="nav navbar-nav pull-right" ng-if="isLoggedIn()">
-      <li class="navbar-text">${{price.usd}}</li>
+      <li class="navbar-text">${{ price.usd }}</li>
       <li class="navbar-text"><span class="glyphicon glyphicon-user">{{ currentUser() }}</span></li>
       <li><a ng-click="logout()">Logout</a></li>
     </ul>
@@ -54,8 +56,11 @@
 <script src="controllers/login.js"></script>
 <script src="controllers/profile.js"></script>
 <script src="controllers/signup.js"></script>
-
 <script src="directives/repeatPasswords.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="angular-sweetalert/SweetAlert.js"></script>
+<script src="bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+
 
 </body>
 </html>
