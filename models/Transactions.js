@@ -8,7 +8,7 @@ var TransactionSchema = new mongoose.Schema({
   //alertLow: Number,
   alert: { type: Boolean , default: false },
   date: Date,
-  //weekValue: [Number],
+  weekValue: [Number],
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

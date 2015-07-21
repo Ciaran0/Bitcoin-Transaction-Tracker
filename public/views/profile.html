@@ -28,8 +28,15 @@
             <span ng-show="sortType == 'amount' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'amount' && sortReverse" class="fa fa-caret-up"></span>
             Amount (<i class="fa fa-btc"></i>)</th>
-          <th>Buy value ($)</th>
-          <th>Value now ($)</th>
+          <th>
+            <a href="#" ng-click="sortType = 'buyValue'; sortReverse = !sortReverse">
+            <span ng-show="sortType == 'buyValue' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'buyValue' && sortReverse" class="fa fa-caret-up"></span>
+            Buy value ($)
+          </th>
+          <th>
+            Value now ($)
+          </th>
           <th>Edit</th>
           <th>Delete</th>
         </thead>
@@ -37,7 +44,7 @@
           <tr ng-repeat-start="transaction in transactions | orderBy:sortType:sortReverse" data-allow-multiple="true" aria-multiselectable="true" class="clickable" bs-collapse-toggle >
             <td><a href="#" >{{transaction.date | date:'dd/MM/yyyy'}}</a></td>
             <td>{{ transaction.amount }}</td>
-            <td>{{ transaction.buyValue }}</td>
+            <td>${{ transaction.buyValue }}</td>
             <td>{{ transaction.amount * price.usd | currency }}</td>
             <td><span class="glyphicon glyphicon-edit"></span></td>
             <td><span class="glyphicon glyphicon-trash" ng-click="areYouSure(transaction)"></span></td>

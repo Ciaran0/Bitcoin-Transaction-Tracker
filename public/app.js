@@ -6,6 +6,10 @@ angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mg
       templateUrl: 'views/home.html',
       controller: 'MainCtrl'
     })
+    .when('/faq', {
+      templateUrl: 'views/faq.html',
+      controller: 'FaqCtrl'
+    })
     .when('/login', {
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'
