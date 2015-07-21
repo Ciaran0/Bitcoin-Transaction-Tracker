@@ -51,6 +51,7 @@ angular.module('MyApp')
         },
         logout: function() {
           return $http.get('/api/logout').success(function() {
+            $location.path('/');
             $window.localStorage.removeItem('bitTracker-token');
             $alert({
               content: 'You have been logged out.',

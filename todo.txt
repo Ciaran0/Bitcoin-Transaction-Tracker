@@ -1,8 +1,5 @@
-Logged in user display name == (DONE)
 refactor routes
-home page for loggedIn user - restrict access to page
-bitcoin price on navbar
-add, update, remove transaction
+update
 Charts
-Mongodb
-gulp stuff
+login? http://bootsnipp.com/snippets/featured/clean-modal-login-form
+Move dependencies to bower

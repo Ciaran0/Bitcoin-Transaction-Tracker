@@ -80,11 +80,16 @@ router.get('/transactions/:transaction', function(req, res){
   res.json(req.transaction);
 });
 
+//Get all transactions for a user
+router.get('/transactions/users/:user', auth, function(req, res){
+  req.user.populate('transactions', function(err, user) {
+    if (err) { return next(err); }
+    res.json(user.transactions);
+  });
+});
+
 //delete a transaction
-router.delete('/transactions/:transaction/users/:user', function(req, res){
-  console.log("delete");
-  console.log(req.user);
-  console.log(req.transaction._id);
+router.delete('/transactions/:transaction/users/:user', auth, function(req, res){
   Transaction.findOneAndRemove({id: 'req.transaction._id'}, function(err){
 
   });
@@ -94,7 +99,7 @@ router.delete('/transactions/:transaction/users/:user', function(req, res){
 });
 
 //add a new transaction for a user
-router.post('/transactions/users/:user', function(req, res){
+router.post('/transactions/users/:user', auth, function(req, res){
   console.log(req.body);
   var transaction = new Transaction(req.body);
   transaction.owner = req.user._id;
@@ -110,14 +115,5 @@ router.post('/transactions/users/:user', function(req, res){
     });
   })
 });
-
-//Get all transactions for a user
-router.get('/transactions/users/:user', function(req, res){
-  req.user.populate('transactions', function(err, user) {
-    if (err) { return next(err); }
-    res.json(user.transactions);
-  });
-});
-//
 
 module.exports = router;

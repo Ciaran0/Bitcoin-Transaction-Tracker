@@ -32,8 +32,8 @@ app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'bower_components')));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 86400000 }));
+app.use(express.static(path.join(__dirname, 'bower_components'), { maxAge: 86400000 }));
 app.use(passport.initialize());
 
 app.use('/', userRoutes);
