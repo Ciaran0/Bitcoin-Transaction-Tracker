@@ -11,6 +11,8 @@ var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var jwt = require('express-jwt');
+var nodemailer = require('nodemailer');
+var async = require('async');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 require('./models/Users');

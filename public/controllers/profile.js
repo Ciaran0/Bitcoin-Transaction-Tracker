@@ -1,6 +1,6 @@
 angular.module('MyApp')
 .controller('ProfileCtrl', [
-        '$scope','transactions','token','SweetAlert','bitcoinPrice',
+        '$scope','transactions','token','SweetAlert','bitcoinPrice','$modal',
         function($scope,transactions,token,SweetAlert,bitcoinPrice) {
 
     $scope.transactions = transactions.transactions;
@@ -9,6 +9,7 @@ angular.module('MyApp')
     $scope.sortReverse = false;
     $scope.searchTransactions = '';
 
+    $scope.modal = {title: 'Title', content: 'Hello Modal<br />This is a multiline message!'};
     $scope.price = bitcoinPrice.getPrice();
 
     $scope.addTransaction = function(){

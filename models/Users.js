@@ -7,10 +7,13 @@ var jwt = require('jsonwebtoken');
 
 
 var UserSchema = new mongoose.Schema({
-  username: {type: String, lowercase: true, unique: true},
+  username: {type: String, lowercase: true, unique: true, required: true},
   hash: String,
   salt: String,
-  transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }]
+  transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }],
+  currency : {type: String, default: "USD"},
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 UserSchema.methods.setPassword = function(password){
