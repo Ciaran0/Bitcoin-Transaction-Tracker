@@ -1,15 +1,15 @@
 angular.module('MyApp')
 .controller('ProfileCtrl', [
         '$scope','transactions','token','SweetAlert','bitcoinPrice','$modal',
-        function($scope,transactions,token,SweetAlert,bitcoinPrice) {
+        function($scope,transactions,token,SweetAlert,bitcoinPrice,$modal) {
 
     $scope.transactions = transactions.transactions;
 
     $scope.sortType = 'date';
     $scope.sortReverse = false;
+    //search yet to be implemented
     $scope.searchTransactions = '';
 
-    $scope.modal = {title: 'Title', content: 'Hello Modal<br />This is a multiline message!'};
     $scope.price = bitcoinPrice.getPrice();
 
     $scope.addTransaction = function(){
@@ -43,10 +43,11 @@ angular.module('MyApp')
       closeOnCancel: true
     }, function(isConfirm){
         if (isConfirm) {
-          console.log("klkksd"+transaction);
           transactions.remove(transaction);
           SweetAlert.swal("Deleted!", "Your transaction has been deleted.", "success");
         }
     });
-  }
+  };
+
+
 }]);

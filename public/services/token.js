@@ -6,7 +6,7 @@ angular.module('MyApp')
    };
    token.getToken = function (){
      return $window.localStorage['bitTracker-token'];
-   }
+   };
    token.isLoggedIn = function(){
     var userToken = token.getToken();
 

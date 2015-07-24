@@ -16,7 +16,7 @@ angular.module('MyApp')
       }).success(function(data){
         o.transactions.push(data);
         //And alert - possibly in controller
-      })
+      });
     };
     o.remove = function(transaction){
       return $http.delete('/transactions/'+transaction._id+"/users/"+token.currentUserId(), {
@@ -24,7 +24,7 @@ angular.module('MyApp')
       }).success(function(data){
         var index = o.transactions.indexOf(transaction);
         o.transactions.splice(index,1);
-      })
-    }
+      });
+    };
     return o;
   }]);

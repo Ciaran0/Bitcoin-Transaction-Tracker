@@ -1,5 +1,6 @@
 refactor routes
 update
+forgot password
 Charts
 login? http://bootsnipp.com/snippets/featured/clean-modal-login-form
 Move dependencies to bower
