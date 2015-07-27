@@ -1,6 +1,6 @@
 angular.module('MyApp')
 .controller('ProfileCtrl', [
-        '$scope','transactions','token','SweetAlert','bitcoinPrice','$modal',
+        '$scope','transactions','token','SweetAlert','bitcoinPrice',
         function($scope,transactions,token,SweetAlert,bitcoinPrice,$modal) {
 
     $scope.transactions = transactions.transactions;
@@ -28,6 +28,23 @@ angular.module('MyApp')
 
    $scope.clearDates = function() {
      $scope.selectedDate = null;
+   };
+
+   $scope.showEditTransaction = false;
+   $scope.transactionToEdit;
+   $scope.showAddTransaction=false;
+   //change this to just the index
+   $scope.editTransaction = function(transaction) {
+      $scope.showEditTransaction= !$scope.showEditTransaction;
+      $scope.transactionToEdit=transaction;
+      $scope.showAddTransaction=false;
+   }
+
+   $scope.doEditTransaction = function(transaction){
+     transactions.edit(token.currentUserId(),{
+       amount: $scope.amount,
+       buyValue: $scope.buyValue,
+     });
    };
 
    $scope.areYouSure = function(transaction) {

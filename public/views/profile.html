@@ -46,7 +46,7 @@
             <td>{{ transaction.amount }}</td>
             <td>${{ transaction.buyValue }}</td>
             <td>{{ transaction.amount * price.usd | currency }}</td>
-            <td><span class="glyphicon glyphicon-edit"></span></td>
+            <td><span class="glyphicon glyphicon-edit" ng-click="editTransaction(transaction); showAddTransaction=false"></span></td>
             <td><span class="glyphicon glyphicon-trash" ng-click="areYouSure(transaction)"></span></td>
             <tr ng-repeat-end  bs-collapse-target>
                 <td colspan=6>htrg</td>
@@ -59,12 +59,9 @@
       <!--
           add Transaction form
       -->
-
   <!-- Yet to implement annimation using ngAnimate -->
-  <button type="button" class="btn btn-lg btn-primary" data-animation="am-fade-and-scale" data-placement="center" data-template-url="templates/modal.addTransaction.tpl.html" bs-modal="modal">Add</button>
-
-
-      <div id="addTransaction">
+  <button type="button" class="btn btn-lg btn-warning" ng-click="showAddTransaction=!showAddTransaction; showEditTransaction=false">Add Transaction</button>
+      <div id="addTransaction" ng-if="showAddTransaction && !showEditTransaction">
         <div class="row">
           <div class="center-form panel">
             <form method="post" ng-submit="addTransaction()" name="addTransactionForm">
@@ -103,7 +100,49 @@
                 </div>
 
                 <button type="submit" ng-disabled="addTransactionForm.$invalid"
-                        class="btn btn-lg btn-block btn-primary">Add
+                        class="btn btn-lg btn-block btn-warning">Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--
+      Edit Transactions
+      -->
+      <div id="editTransaction" ng-if="showEditTransaction">
+        <div class="row">
+          <div class="center-form panel">
+            <form method="post" ng-submit="doEditTransaction(transactionToEdit_id)" name="editTransactionForm">
+              <div class="panel-body">
+                <h2 class="text-center">Edit Transaction</h2>
+
+                <div class="form-group"
+                     ng-class="{ 'has-success' : editTransactionForm.amount.$valid && editTransactionForm.amount.$dirty, 'has-error' : editTransactionForm.amount.$invalid && editTransactionForm.amount.$dirty }">
+                  <input class="form-control input-lg" type="number" id="amount"
+                         name="amount" ng-model="transactionToEdit.amount" step="any" min="0" required autofocus>
+
+                  <div class="help-block text-danger" ng-if="editTransactionForm.amount.$dirty"
+                       ng-messages="editTransactionForm.amount.$error">
+                    <div ng-message="required">You must enter an amount</div>
+                    <div ng-message="number">Amount is invalid. Must be greater than 0</div>
+                  </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{ 'has-success' : editTransactionForm.buyValue.$valid && editTransactionForm.buyValue.$dirty, 'has-error' : editTransactionForm.buyValue.$invalid && editTransactionForm.buyValue.$dirty }">
+                  <input class="form-control input-lg" type="text" id="buyValue"
+                         name="buyValue" ng-model="transactionToEdit.buyValue" step="any" min="0" required autofocus>
+
+                  <div class="help-block text-danger" ng-if="editTransactionForm.buyValue.$dirty"
+                       ng-messages="editTransactionForm.buyValue.$error">
+                    <div ng-message="required">You must enter a buy value</div>
+                    <div ng-message="number">Buy value is invalid. Must be greater than $0</div>
+                  </div>
+                </div>
+
+                <button type="submit" ng-disabled="editTransactionForm.$invalid"
+                        class="btn btn-lg btn-block btn-warning">Add
                 </button>
               </div>
             </form>

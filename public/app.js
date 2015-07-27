@@ -1,6 +1,9 @@
-angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap','oitozero.ngSweetAlert'])
-  .config(['$locationProvider','$routeProvider', function($locationProvider, $routeProvider) {
+angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mgcrea.ngStrap','oitozero.ngSweetAlert','ngSanitize'])
+  .config(['$locationProvider','$routeProvider','$modalProvider', function($locationProvider, $routeProvider,$modalProvider) {
     $locationProvider.html5Mode(true);
+    angular.extend($modalProvider.defaults, {
+      html: true
+    });
     $routeProvider
     .when('/', {
       templateUrl: 'views/home.html',
@@ -43,4 +46,5 @@ angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mg
       redirectTo: '/'
     });
 
-  }]);
+  }
+]);

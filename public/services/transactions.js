@@ -18,6 +18,14 @@ angular.module('MyApp')
         //And alert - possibly in controller
       });
     };
+    o.edit = function(id,transaction){
+      return $http.put('/transactions/users/'+id, transaction, {
+        headers: {Authorization: 'Bearer '+token.getToken()}
+      }).success(function(data){
+        //manipulate array
+        //And alert - possibly in controller
+      });
+    };
     o.remove = function(transaction){
       return $http.delete('/transactions/'+transaction._id+"/users/"+token.currentUserId(), {
         headers: {Authorization: 'Bearer '+token.getToken()}

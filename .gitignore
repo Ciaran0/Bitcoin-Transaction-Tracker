@@ -1,1 +1,36 @@
 node_modules
+bin
+bower_components
+
+# General
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+logs/
+build/
+
+# IntelliJ
+*.iml
+
+# Node and related ecosystem
+.nodemonignore
+.sass-cache/
+npm-debug.log
+node_modules/
+public/lib/
+app/tests/coverage/
+.bower-*/
+.idea/
+
+# iOS / Apple
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+config/env/local.js
