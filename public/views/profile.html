@@ -71,7 +71,7 @@
                 <div class="form-group"
                      ng-class="{ 'has-success' : addTransactionForm.amount.$valid && addTransactionForm.amount.$dirty, 'has-error' : addTransactionForm.amount.$invalid && addTransactionForm.amount.$dirty }">
                   <input class="form-control input-lg" type="number" id="amount"
-                         name="amount" ng-model="amount" step="any" min="0" placeholder="Buy Amount" required
+                         name="amount" ng-model="$parent.amount" step="any" min="0" placeholder="Buy Amount" required
                          autofocus>
 
                   <div class="help-block text-danger" ng-if="addTransactionForm.amount.$dirty"
@@ -84,7 +84,7 @@
                 <div class="form-group"
                      ng-class="{ 'has-success' : addTransactionForm.buyValue.$valid && addTransactionForm.buyValue.$dirty, 'has-error' : addTransactionForm.buyValue.$invalid && addTransactionForm.buyValue.$dirty }">
                   <input class="form-control input-lg" type="number" id="buyValue"
-                         name="buyValue" ng-model="buyValue" step="any" min="0" placeholder="Buy Value ($)" required
+                         name="buyValue" ng-model="$parent.buyValue" step="any" min="0" placeholder="Buy Value ($)" required
                          autofocus>
 
                   <div class="help-block text-danger" ng-if="addTransactionForm.buyValue.$dirty"
@@ -96,7 +96,7 @@
 
                 <div class="form-group" ng-class="{'has-error': addTransactionForm.date.$invalid}">
                   <label class="control-label"><i class="fa fa-calendar"></i> Date <small>(optional)</small></label>
-                  <input type="text" class="form-control" ng-model="selectedDate" name="date" bs-datepicker>
+                  <input type="text" class="form-control" ng-model="$parent.selectedDate" name="date" bs-datepicker>
                 </div>
 
                 <button type="submit" ng-disabled="addTransactionForm.$invalid"
@@ -108,47 +108,47 @@
         </div>
       </div>
       <!--
-      Edit Transactions
-      -->
-      <div id="editTransaction" ng-if="showEditTransaction">
-        <div class="row">
-          <div class="center-form panel">
-            <form method="post" ng-submit="doEditTransaction(transactionToEdit_id)" name="editTransactionForm">
-              <div class="panel-body">
-                <h2 class="text-center">Edit Transaction</h2>
+     Edit Transactions
+     -->
+     <div id="editTransaction" ng-if="showEditTransaction">
+       <div class="row">
+         <div class="center-form panel">
+           <form method="post" ng-submit="doEditTransaction(transactionToEdit_id)" name="editTransactionForm">
+             <div class="panel-body">
+               <h2 class="text-center">Edit Transaction</h2>
 
-                <div class="form-group"
-                     ng-class="{ 'has-success' : editTransactionForm.amount.$valid && editTransactionForm.amount.$dirty, 'has-error' : editTransactionForm.amount.$invalid && editTransactionForm.amount.$dirty }">
-                  <input class="form-control input-lg" type="number" id="amount"
-                         name="amount" ng-model="transactionToEdit.amount" step="any" min="0" required autofocus>
+               <div class="form-group"
+                    ng-class="{ 'has-success' : editTransactionForm.amount.$valid && editTransactionForm.amount.$dirty, 'has-error' : editTransactionForm.amount.$invalid && editTransactionForm.amount.$dirty }">
+                 <input class="form-control input-lg" type="number" id="amount"
+                        name="amount" ng-model="transactionToEdit.amount" step="any" min="0" required autofocus>
 
-                  <div class="help-block text-danger" ng-if="editTransactionForm.amount.$dirty"
-                       ng-messages="editTransactionForm.amount.$error">
-                    <div ng-message="required">You must enter an amount</div>
-                    <div ng-message="number">Amount is invalid. Must be greater than 0</div>
-                  </div>
-                </div>
+                 <div class="help-block text-danger" ng-if="editTransactionForm.amount.$dirty"
+                      ng-messages="editTransactionForm.amount.$error">
+                   <div ng-message="required">You must enter an amount</div>
+                   <div ng-message="number">Amount is invalid. Must be greater than 0</div>
+                 </div>
+               </div>
 
-                <div class="form-group"
-                     ng-class="{ 'has-success' : editTransactionForm.buyValue.$valid && editTransactionForm.buyValue.$dirty, 'has-error' : editTransactionForm.buyValue.$invalid && editTransactionForm.buyValue.$dirty }">
-                  <input class="form-control input-lg" type="text" id="buyValue"
-                         name="buyValue" ng-model="transactionToEdit.buyValue" step="any" min="0" required autofocus>
+               <div class="form-group"
+                    ng-class="{ 'has-success' : editTransactionForm.buyValue.$valid && editTransactionForm.buyValue.$dirty, 'has-error' : editTransactionForm.buyValue.$invalid && editTransactionForm.buyValue.$dirty }">
+                 <input class="form-control input-lg" type="text" id="buyValue"
+                        name="buyValue" ng-model="transactionToEdit.buyValue" step="any" min="0" required autofocus>
 
-                  <div class="help-block text-danger" ng-if="editTransactionForm.buyValue.$dirty"
-                       ng-messages="editTransactionForm.buyValue.$error">
-                    <div ng-message="required">You must enter a buy value</div>
-                    <div ng-message="number">Buy value is invalid. Must be greater than $0</div>
-                  </div>
-                </div>
+                 <div class="help-block text-danger" ng-if="editTransactionForm.buyValue.$dirty"
+                      ng-messages="editTransactionForm.buyValue.$error">
+                   <div ng-message="required">You must enter a buy value</div>
+                   <div ng-message="number">Buy value is invalid. Must be greater than $0</div>
+                 </div>
+               </div>
 
-                <button type="submit" ng-disabled="editTransactionForm.$invalid"
-                        class="btn btn-lg btn-block btn-warning">Add
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+               <button type="submit" ng-disabled="editTransactionForm.$invalid"
+                       class="btn btn-lg btn-block btn-warning">Add
+               </button>
+             </div>
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 </div>

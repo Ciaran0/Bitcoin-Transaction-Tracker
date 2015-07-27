@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 var TransactionSchema = new mongoose.Schema({
-  amount: Number,
-  buyValue: Number,
+  amount: {type: Number, required: true},
+  buyValue: {type: Number, required: true},
   //alertHigh: Number,
   //alertLow: Number,
   alert: { type: Boolean , default: false },

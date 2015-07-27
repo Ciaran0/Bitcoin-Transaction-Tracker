@@ -1,7 +1,7 @@
 angular.module('MyApp')
 .controller('ProfileCtrl', [
         '$scope','transactions','token','SweetAlert','bitcoinPrice',
-        function($scope,transactions,token,SweetAlert,bitcoinPrice,$modal) {
+        function($scope,transactions,token,SweetAlert,bitcoinPrice) {
 
     $scope.transactions = transactions.transactions;
 
@@ -11,8 +11,10 @@ angular.module('MyApp')
     $scope.searchTransactions = '';
 
     $scope.price = bitcoinPrice.getPrice();
-
+    $scope.amount;
+    $scope.buyValue;
     $scope.addTransaction = function(){
+      console.log($scope.buyValue);
       transactions.create(token.currentUserId(),{
         amount: $scope.amount,
         buyValue: $scope.buyValue,
@@ -31,7 +33,7 @@ angular.module('MyApp')
    };
 
    $scope.showEditTransaction = false;
-   $scope.transactionToEdit;
+   //$scope.transactionToEdit;
    $scope.showAddTransaction=false;
    //change this to just the index
    $scope.editTransaction = function(transaction) {
@@ -40,12 +42,12 @@ angular.module('MyApp')
       $scope.showAddTransaction=false;
    }
 
-   $scope.doEditTransaction = function(transaction){
+   /*$scope.doEditTransaction = function(transaction){
      transactions.edit(token.currentUserId(),{
-       amount: $scope.amount,
-       buyValue: $scope.buyValue,
+       amount: $scope.transactionToEdit.amount,
+       buyValue: $scope.transactionToEdit.buyValue,
      });
-   };
+   };*/
 
    $scope.areYouSure = function(transaction) {
      SweetAlert.swal({

@@ -1,6 +1,7 @@
 node_modules
 bin
 bower_components
+config/*.json
 
 # General
 *.log

@@ -13,7 +13,10 @@ var passport = require('passport');
 var jwt = require('express-jwt');
 var nodemailer = require('nodemailer');
 var async = require('async');
-var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
+var config = require('config');
+
+var secret = config.get('auth.secret');
+var auth = jwt({secret: secret, userProperty: 'payload'});
 
 require('./models/Users');
 require('./models/Transactions');
@@ -24,8 +27,8 @@ var userRoutes = require('./routes/users');
 var transactionRoutes = require('./routes/transactionRoutes');
 
 
-
-mongoose.connect('mongodb://localhost/bi')
+var dbUrl = config.get('dbConfig.url');
+mongoose.connect(dbUrl);
 
 var app = express();
 
