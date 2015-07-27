@@ -33,7 +33,7 @@ angular.module('MyApp')
    };
 
    $scope.showEditTransaction = false;
-   //$scope.transactionToEdit;
+   $scope.transactionToEdit;
    $scope.showAddTransaction=false;
    //change this to just the index
    $scope.editTransaction = function(transaction) {
@@ -42,12 +42,13 @@ angular.module('MyApp')
       $scope.showAddTransaction=false;
    }
 
-   /*$scope.doEditTransaction = function(transaction){
-     transactions.edit(token.currentUserId(),{
+   $scope.doEditTransaction = function(transaction){
+     transactions.edit($scope.transactionToEdit._id,{
        amount: $scope.transactionToEdit.amount,
        buyValue: $scope.transactionToEdit.buyValue,
+       user: token.currentUserId()
      });
-   };*/
+   };
 
    $scope.areYouSure = function(transaction) {
      SweetAlert.swal({

@@ -1,5 +1,5 @@
 angular.module('MyApp')
-  .factory('transactions', ['$http', 'token', function($http, token) {
+  .factory('transactions', ['$http', 'token','$alert', function($http, token,$alert) {
     var o = {
       transactions: []
     };
@@ -15,15 +15,26 @@ angular.module('MyApp')
         headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
         o.transactions.push(data);
-        //And alert - possibly in controller
+        $alert({
+          title: 'Added!',
+          content: 'You have added a transaction',
+          placement: 'top-right',
+          type: 'success',
+          duration: 3
+        });
       });
     };
     o.edit = function(id,transaction){
-      return $http.put('/transactions/users/'+id, transaction, {
+      return $http.put('/transactions/'+id, transaction, {
         headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
-        //manipulate array
-        //And alert - possibly in controller
+        $alert({
+          title: 'Edited!',
+          content: 'You have edited your transaction',
+          placement: 'top-right',
+          type: 'success',
+          duration: 3
+        });
       });
     };
     o.remove = function(transaction){
@@ -32,6 +43,13 @@ angular.module('MyApp')
       }).success(function(data){
         var index = o.transactions.indexOf(transaction);
         o.transactions.splice(index,1);
+        $alert({
+          title: 'Deleted!',
+          content: 'You have deleted your transaction.',
+          placement: 'top-right',
+          type: 'success',
+          duration: 3
+        });
       });
     };
     return o;

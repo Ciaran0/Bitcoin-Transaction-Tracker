@@ -185,6 +185,20 @@ router.get('/transactions/:transaction', function(req, res){
   res.json(req.transaction);
 });
 
+//edit a transaction
+router.put('/transactions/:transaction', function(req, res, next){
+  Transaction.findOneAndUpdate({'_id': req.transaction._id},  {
+      'buyValue': req.body.buyValue,
+      'amount': req.body.amount
+  },{new: true}, function(err, updatedTransaction) {
+    if(!obj){
+      return next(err);
+    }
+    updatedTransaction.save();
+    res.json(updatedTransaction);
+  });
+});
+
 //Get all transactions for a user
 router.get('/transactions/users/:user', auth, function(req, res){
   req.user.populate('transactions', function(err, user) {
@@ -196,7 +210,7 @@ router.get('/transactions/users/:user', auth, function(req, res){
 //delete a transaction
 router.delete('/transactions/:transaction/users/:user', auth, function(req, res){
   Transaction.findOneAndRemove({id: 'req.transaction._id'}, function(err){
-
+      return next(new Error('Error while deleting transaction'));
   });
   req.user.transactions.pull(req.transaction);
   req.user.save();
