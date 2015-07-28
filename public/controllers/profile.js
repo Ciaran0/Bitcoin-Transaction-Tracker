@@ -14,7 +14,6 @@ angular.module('MyApp')
     $scope.amount;
     $scope.buyValue;
     $scope.addTransaction = function(){
-      console.log($scope.buyValue);
       transactions.create(token.currentUserId(),{
         amount: $scope.amount,
         buyValue: $scope.buyValue,

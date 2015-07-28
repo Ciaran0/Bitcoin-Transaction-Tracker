@@ -29,7 +29,6 @@ angular.module('MyApp')
           return $http.post('/api/signup', user)
             .success(function(data, status, headers, config) {
               $location.path('/profile');
-              console.log(data.token);
               token.saveToken(data.token);
               $alert({
                 title: 'Congratulations!',

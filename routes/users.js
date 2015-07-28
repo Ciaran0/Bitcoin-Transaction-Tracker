@@ -191,7 +191,7 @@ router.put('/transactions/:transaction', function(req, res, next){
       'buyValue': req.body.buyValue,
       'amount': req.body.amount
   },{new: true}, function(err, updatedTransaction) {
-    if(!obj){
+    if(!updatedTransaction){
       return next(err);
     }
     updatedTransaction.save();
@@ -208,9 +208,9 @@ router.get('/transactions/users/:user', auth, function(req, res){
 });
 
 //delete a transaction
-router.delete('/transactions/:transaction/users/:user', auth, function(req, res){
+router.delete('/transactions/:transaction/users/:user', auth, function(req, res, next){
   Transaction.findOneAndRemove({id: 'req.transaction._id'}, function(err){
-      return next(new Error('Error while deleting transaction'));
+      return next(err);
   });
   req.user.transactions.pull(req.transaction);
   req.user.save();
@@ -218,8 +218,7 @@ router.delete('/transactions/:transaction/users/:user', auth, function(req, res)
 });
 
 //add a new transaction for a user
-router.post('/transactions/users/:user', auth, function(req, res){
-  console.log(req.body);
+router.post('/transactions/users/:user', auth, function(req, res, next){
   var transaction = new Transaction(req.body);
   transaction.owner = req.user._id;
   transaction.save(function(err, transaction){
@@ -230,7 +229,6 @@ router.post('/transactions/users/:user', auth, function(req, res){
     req.user.save(function(err, post) {
     if(err){ return next(err); }
       res.json(transaction);
-      console.log(transaction);
     });
   })
 });
