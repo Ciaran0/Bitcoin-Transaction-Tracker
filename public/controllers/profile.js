@@ -4,13 +4,14 @@ angular.module('MyApp')
         function($scope,transactions,token,SweetAlert,bitcoinPrice) {
 
     $scope.transactions = transactions.transactions;
+    console.log(transactions);
 
     $scope.sortType = 'date';
     $scope.sortReverse = false;
     //search yet to be implemented
     $scope.searchTransactions = '';
 
-    $scope.price = bitcoinPrice.getPrice();
+   // $scope.price = bitcoinPrice.getPrice();
     $scope.amount;
     $scope.buyValue;
     $scope.addTransaction = function(){

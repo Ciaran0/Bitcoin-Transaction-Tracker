@@ -3,7 +3,7 @@ angular.module('MyApp')
     function($http, $location, $alert, $window, token) {
         return {
         login: function(user) {
-          return $http.post('/api/login', user)
+          return $http.post('/users/login', user)
             .success(function(data) {
               token.saveToken(data.token);
               $location.path('/profile');
@@ -26,7 +26,7 @@ angular.module('MyApp')
             });
         },
         signup: function(user) {
-          return $http.post('/api/signup', user)
+          return $http.post('/users/signup', user)
             .success(function(data, status, headers, config) {
               $location.path('/profile');
               token.saveToken(data.token);
@@ -49,7 +49,7 @@ angular.module('MyApp')
             });
         },
         logout: function() {
-          return $http.get('/api/logout').success(function() {
+          return $http.get('/users/logout').success(function() {
             $location.path('/');
             $window.localStorage.removeItem('bitTracker-token');
             $alert({

@@ -23,9 +23,6 @@ require('./models/Transactions');
 require('./config/passport');
 var User = mongoose.model('User');
 var Transaction = mongoose.model('Transaction');
-var userRoutes = require('./routes/users');
-var transactionRoutes = require('./routes/transactionRoutes');
-
 
 var dbUrl = config.get('dbConfig.url');
 mongoose.connect(dbUrl);
@@ -41,8 +38,8 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 86400000 }));
 app.use(express.static(path.join(__dirname, 'bower_components'), { maxAge: 86400000 }));
 app.use(passport.initialize());
 
-app.use('/', userRoutes);
-app.use('/transactions', transactionRoutes);
+app.use('/users', require('./routes/users'));
+app.use('/transactions', require('./routes/transactionRoutes'));
 
 //redirect url. Should be last route
 app.get('*', function(req, res) {

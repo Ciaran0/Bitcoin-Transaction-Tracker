@@ -36,6 +36,7 @@
           <th>
             Value now ($)
           </th>
+          <th>Profit</th>
           <th>Edit</th>
           <th>Delete</th>
         </thead>
@@ -44,7 +45,8 @@
             <td><a href="#" >{{transaction.date | date:'dd/MM/yyyy'}}</a></td>
             <td>{{ transaction.amount }}</td>
             <td>${{ transaction.buyValue }}</td>
-            <td>{{ transaction.amount * price.usd | currency }}</td>
+            <td><!--{{ transaction.amount * price.usd | currency }}-->99</td>
+            <td>${{ transaction.profit }}</td>
             <td><span class="glyphicon glyphicon-edit" ng-click="editTransaction(transaction); showAddTransaction=false"></span></td>
             <td><span class="glyphicon glyphicon-trash" ng-click="areYouSure(transaction)"></span></td>
             <tr ng-repeat-end  bs-collapse-target>

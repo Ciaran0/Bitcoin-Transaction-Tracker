@@ -1,5 +1,5 @@
 angular.module('MyApp')
-  .factory('transactions', ['$http', 'token','$alert', function($http, token,$alert) {
+  .factory('transactions', ['$http', 'token','$alert','bitcoinPrice', function($http, token,$alert,bitcoinPrice) {
     var o = {
       transactions: []
     };
@@ -8,6 +8,10 @@ angular.module('MyApp')
         headers: {Authorization: 'Bearer '+token.getToken()}
       }).success(function(data){
         angular.copy(data, o.transactions);
+        o.transactions.forEach(function(transaction) {
+          transaction.valueNow = transaction.amount * bitcoinPrice.getPrice().usd;
+          transaction.profit = transaction.valueNow - transaction.buyValue;
+        });
       });
     };
     o.create = function(id,transaction){

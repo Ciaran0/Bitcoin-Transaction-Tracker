@@ -5,6 +5,10 @@ var router = express.Router();
 var User = mongoose.model('User');
 var Transaction = mongoose.model('Transaction');
 
+var jwt = require('express-jwt');
+
+var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
+
 router.param('transaction', function(req, res, next, id){
   var query = Transaction.findById(id);
 
@@ -28,29 +32,59 @@ router.param('user', function(req,res,next,id){
     if(err){
       return next(err);
     }
-    if(!transaction){
+    if(!user){
       return next(new Error('Couldnt find user'));
     }
-
     req.user = user;
     return next();
   });
-})
-
-router.get('/transactions/:transaction', function(req, res){
-  res.json(req.transaction);
 });
 
-router.post('transactions/users/:user', function(req, res){
-  var transaction = new Transaction(req.body);
-  transaction.user = req.user;
+//edit a transaction
+router.put('/:transaction', function(req, res, next){
+  Transaction.findOneAndUpdate({'_id': req.transaction._id},  {
+      'buyValue': req.body.buyValue,
+      'amount': req.body.amount
+  },{new: true}, function(err, updatedTransaction) {
+    if(!updatedTransaction){
+      return next(err);
+    }
+    updatedTransaction.save();
+    res.json(updatedTransaction);
+  });
+});
 
+//Get all transactions for a user
+router.get('/users/:user', auth, function(req, res){
+  req.user.populate('transactions', function(err, user) {
+    if (err) { return next(err); }
+    res.json(user.transactions);
+  });
+});
+
+//delete a transaction
+router.delete('/:transaction/users/:user', auth, function(req, res, next){
+  Transaction.findOneAndRemove({id: 'req.transaction._id'}, function(err){
+      return next(err);
+  });
+  req.user.transactions.pull(req.transaction);
+  req.user.save();
+  res.json({message: 'Transaction Deleted'});
+});
+
+//add a new transaction for a user
+router.post('/users/:user', auth, function(req, res, next){
+  var transaction = new Transaction(req.body);
+  transaction.owner = req.user._id;
   transaction.save(function(err, transaction){
     if(err){
       return next(err);
     }
-
-    res.json(transaction)
+    req.user.transactions.push(transaction);
+    req.user.save(function(err, post) {
+    if(err){ return next(err); }
+      res.json(transaction);
+    });
   })
 });
 
