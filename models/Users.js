@@ -13,7 +13,8 @@ var UserSchema = new mongoose.Schema({
   transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }],
   currency : {type: String, default: "USD"},
   resetPasswordToken: String,
-  resetPasswordExpires: Date
+  resetPasswordExpires: Date,
+  role: {type: String, default: "user"}
 });
 
 UserSchema.methods.setPassword = function(password){
@@ -38,6 +39,7 @@ UserSchema.methods.generateJWT = function() {
   return jwt.sign({
     _id: this._id,
     username: this.username,
+    role: this.role,
     exp: parseInt(exp.getTime() / 1000),
   }, 'SECRET');
 };

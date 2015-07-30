@@ -48,6 +48,9 @@ angular.module('MyApp')
               });
             });
         },
+        authorize: function(requiredRole) {
+          return token.getCurrentUserRole() === requiredRole;
+        },
         logout: function() {
           return $http.get('/users/logout').success(function() {
             $location.path('/');

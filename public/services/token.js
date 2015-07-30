@@ -31,5 +31,12 @@ angular.module('MyApp')
           return payload._id;
       }
   };
+  token.currentUserRole = function(){
+      if(token.isLoggedIn()){
+          var userToken = token.getToken();
+          var payload = JSON.parse($window.atob(userToken.split('.')[1]));
+          return payload.role;
+      }
+  };
   return token;
 }]);

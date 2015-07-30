@@ -21,6 +21,22 @@ angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mg
       templateUrl: 'views/signup.html',
       controller: 'SignupCtrl'
     })
+    .when('/admin', {
+      templateUrl: 'views/admin.html',
+      controller: 'AdminCtrl',
+      resolve: {
+        token: 'token',
+        load: function($q, $location, token) {
+          var deferred = $q.defer();
+          deferred.resolve();
+          console.log(token.currentUserRole());
+          if (token.currentUserRole()!=="admin") {
+             $location.path('/');
+          }
+          return deferred.promise;
+        }
+      }
+    })
     .when('/profile' , {
       templateUrl: 'views/profile.html',
       controller: 'ProfileCtrl',
