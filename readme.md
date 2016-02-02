@@ -6,16 +6,19 @@ This project has been shelved for awhile. Was used as an introduction to the Mea
 To get working you must provide a configuration file.
 config/default.json
 
+```json  
  "dbConfig": {
    "url": <<URL>>
  },
  "auth": {
    "secret": <<SECRET>>
- }
+ }  
+```
 
 ###To run:
 
-Make sure a mongodb instance is running and you have put the url in config/default.json. You can start mongo with the command mongod.  
+Make sure a mongodb instance is running and you have put the url to the DB in config/default.json.  
+You can start mongo with the command mongod.  
 
-node server.js
+node server.js  
 gulp
