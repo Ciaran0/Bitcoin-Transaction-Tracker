@@ -4,7 +4,6 @@ var logger = require('morgan');
 var bcrypt = require('bcryptjs');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var crypto = require('crypto');
@@ -26,7 +25,7 @@ var Transaction = mongoose.model('Transaction');
 
 var dbUrl = config.get('dbConfig.url');
 mongoose.connect(dbUrl);
-
+//mongoose.connect('mongodb://localhost/bi')
 var app = express();
 
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
@@ -35,7 +34,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 86400000 }));
-app.use(express.static(path.join(__dirname, 'bower_components'), { maxAge: 86400000 }));
+//app.use(express.static(path.join(__dirname, 'bower_components'), { maxAge: 86400000 }));
 app.use(passport.initialize());
 
 app.use('/users', require('./routes/users'));
